@@ -109,11 +109,12 @@ minmax(array)
 //Exercise 10
 def stringToMap(s: String): mutable.Map[Char, Array[Int]] = {
   var map: mutable.Map[Char, Array[Int]] = mutable.Map(s(0) -> Array(0))
-   for(i <- 0 until s.length){
+   for(i <- 1 until s.length){
      if(!map.keys.exists(_.equals(s(i)))){
        map += (s(i) -> Array(i))
      }else{
-       map(s(i)) -> i
+       var int = map(s(i))
+       map += (s(i) -> int.concat(Array(i)))
      }
    }
   map

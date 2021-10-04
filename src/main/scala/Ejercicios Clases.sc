@@ -32,7 +32,7 @@ t3.isSooner(t4)
 //Exercise 2
 class Person(var name: String, var age: Int){
   def print: Unit ={
-    println(s"Mi nombre es $name y tengo $age")
+    println(s"My name is $name and I have $age")
   }
 }
 
@@ -75,23 +75,23 @@ object Conversions{
 }
 
 //Exercise 6
-abstract class UnitConversor{
+abstract class UnitConverter{
   def convert(d: Double): Double
 }
 
-object InchToCentimetres extends UnitConversor{
+object InchToCentimetres extends UnitConverter{
   override def convert(d: Double): Double ={
     d*2.54
   }
 }
 
-object MilesToKilometres extends UnitConversor{
+object MilesToKilometres extends UnitConverter{
   override def convert(d: Double): Double ={
     d*1.60934
   }
 }
 
-object GallonsToLitres extends UnitConversor{
+object GallonsToLitres extends UnitConverter{
   override def convert(d: Double): Double ={
     d*3.78541
   }
@@ -106,7 +106,8 @@ object Point{
   }
 }
 
-//Ejercicio 8
+//Exercise 8
+//It doesn't behave like a program, to do so create a class
 object main{
   def main(args: Array[String]): Unit ={
     for(s <- args.length-1 until 0){
