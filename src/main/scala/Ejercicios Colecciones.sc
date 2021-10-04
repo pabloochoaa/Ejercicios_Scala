@@ -1,5 +1,6 @@
 import scala.util.control._
 import scala.annotation.tailrec
+import scala.collection.mutable
 import scala.util.control.Breaks.break
 //Ejercicio 1
 for(i <-0 to 10) println(i)
@@ -31,7 +32,7 @@ def aleatorio (n: Int): Seq[Int] ={
 var aux = aleatorio(10)
 aux.foreach(println)
 println(s"Aux $aux")
-for(it <- 0 to aux.size-1) println(aux(it)) //las 3 formas hacen lo mismo
+for(it <- aux.indices) println(aux(it)) //las 3 formas hacen lo mismo
 
 println(s"Tamaño de aux ${aux.size}")
 
@@ -64,7 +65,7 @@ def mediaArray(a: Array[Double]): Double ={
   for(i <- a){
     res += i
   }
-  res/a.size
+  res/a.length
 }
 var array = Array[Double](21.5,5.06,2.5,80,21.32,365478)
 println(s"La media del vector es ${mediaArray(array)}")
@@ -77,3 +78,45 @@ def noDuplicados(a: Array[Int]): Array[Int] = {
 var array = Array[Int](1,2,3,4,5,6,1,5,9,8,7,9)
 var noR = noDuplicados(array)
 println(s"${noR.foreach(print)}")
+
+//Ejercicio 7
+def noCeros(seq: Seq[Int]): Seq[Int] ={
+  seq.filter( _ != 0)
+}
+
+var seq : Seq[Int] = Seq[Int](1,0,2,3,5,8,0,36)
+var noCero = noCeros(seq)
+println(s"$noCero")
+
+//Ejercicio 8
+def incremento10(m: Map[String, Int]): Map[String, Int] ={
+  m.transform((k, v) => (110*v)/100) //no permitía poner 1.1 porque eso devolvía un double y esperaba un Int
+}
+
+var map : Map[String, Int] = Map("a" -> 10, "b" -> 20, "c" -> 100, "d" -> 200)
+incremento10(map)
+
+//Ejercicio 9
+def minmax(values: Array[Int]): (Int, Int) ={
+  var aux = values.sorted
+  var t = (aux(0), aux(aux.length-1))
+  t
+}
+
+var array : Array[Int] = Array(4,1,9,42,56,-1,10,25)
+minmax(array)
+
+//Ejercicio 10
+def stringToMap(s: String): mutable.Map[Char, List[Int]] = {
+  var map: mutable.Map[Char, List[Int]] = mutable.Map(s(0) -> List(0))
+   for(i <- 0 until s.length){
+     if(!map.keys.exists(_.equals(s(i)))){
+       map += (s(i) -> List(i))
+     }else{
+       map(s(i)) -> i
+     }
+   }
+  map
+}
+
+stringToMap("albacete")
